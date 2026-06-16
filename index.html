@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИИ-агенты для бизнеса · КП для Бориса · ИИ-ВИЗАЦИЯ</title>
+<style>
+  :root {
+    --c-accent: #1D9E75;
+    --c-accent-light: #E1F5EE;
+    --c-accent-mid: #0F6E56;
+    --c-dark: #0a0f0d;
+    --c-text: #1a1f1c;
+    --c-text-muted: #5a6360;
+    --c-text-faint: #8a9490;
+    --c-border: #dde8e4;
+    --c-surface: #f4faf7;
+    --c-white: #ffffff;
+    --c-tag-bg: #E1F5EE;
+    --c-tag-text: #0F6E56;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8fbf9; color: var(--c-text); line-height: 1.65; font-size: 16px; }
+  a { color: var(--c-accent); text-decoration: none; }
+  .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--c-border); padding: 14px 0; }
+  .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-brand { font-size: 13px; font-weight: 600; color: var(--c-text-muted); letter-spacing: 0.04em; text-transform: uppercase; }
+  .nav-cta { font-size: 13px; font-weight: 600; color: var(--c-accent-mid); border: 1.5px solid var(--c-accent); border-radius: 6px; padding: 6px 16px; transition: background 0.15s; }
+  .nav-cta:hover { background: var(--c-accent-light); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  .hero { padding: 72px 0 56px; border-bottom: 1px solid var(--c-border); }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-accent-mid); background: var(--c-tag-bg); padding: 5px 12px; border-radius: 20px; margin-bottom: 28px; }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent); display: inline-block; }
+  .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.13; letter-spacing: -0.02em; color: var(--c-dark); margin-bottom: 24px; max-width: 680px; }
+  .hero h1 span { color: var(--c-accent); }
+  .hero-sub { font-size: 18px; color: var(--c-text-muted); max-width: 580px; line-height: 1.6; margin-bottom: 44px; }
+  .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
+  .stat-card { background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 20px 20px 16px; }
+  .stat-num { font-size: 28px; font-weight: 700; color: var(--c-dark); letter-spacing: -0.02em; line-height: 1; margin-bottom: 6px; }
+  .stat-num span { color: var(--c-accent); }
+  .stat-label { font-size: 13px; color: var(--c-text-muted); }
+  .section { padding: 64px 0; border-bottom: 1px solid var(--c-border); }
+  .section-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-accent); margin-bottom: 10px; }
+  .section-title { font-size: clamp(22px, 3vw, 30px); font-weight: 700; letter-spacing: -0.015em; color: var(--c-dark); margin-bottom: 12px; line-height: 1.2; }
+  .section-lead { font-size: 16px; color: var(--c-text-muted); max-width: 600px; margin-bottom: 40px; }
+  .task-card { background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; }
+  .task-header { display: flex; align-items: flex-start; gap: 16px; padding: 28px 28px 20px; border-bottom: 1px solid var(--c-border); }
+  .task-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--c-tag-bg); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .task-meta { flex: 1; }
+  .task-num { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-text-faint); margin-bottom: 4px; }
+  .task-title { font-size: 20px; font-weight: 700; color: var(--c-dark); margin-bottom: 4px; }
+  .task-subtitle { font-size: 14px; color: var(--c-text-muted); }
+  .task-badge { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; background: var(--c-tag-bg); color: var(--c-tag-text); white-space: nowrap; }
+  .task-body { padding: 24px 28px; }
+  .task-body p { font-size: 15px; color: var(--c-text-muted); margin-bottom: 20px; line-height: 1.65; }
+  .task-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .feature-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--c-text); }
+  .feature-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--c-tag-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .feature-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent); display: block; }
+  .included-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .included-card { background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 20px; }
+  .included-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+  .included-name { font-size: 14px; font-weight: 600; color: var(--c-dark); margin-bottom: 6px; }
+  .included-desc { font-size: 13px; color: var(--c-text-muted); line-height: 1.55; }
+  .timeline { position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 19px; top: 8px; bottom: 8px; width: 2px; background: var(--c-border); }
+  .tl-item { display: flex; gap: 20px; margin-bottom: 28px; position: relative; }
+  .tl-dot { width: 40px; height: 40px; border-radius: 50%; background: var(--c-white); border: 2px solid var(--c-accent); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--c-accent); flex-shrink: 0; z-index: 1; }
+  .tl-content { padding-top: 8px; }
+  .tl-title { font-size: 15px; font-weight: 600; color: var(--c-dark); margin-bottom: 4px; }
+  .tl-desc { font-size: 14px; color: var(--c-text-muted); }
+  .tl-tag { display: inline-block; font-size: 11px; font-weight: 600; color: var(--c-text-faint); background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 4px; padding: 2px 8px; margin-bottom: 6px; }
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .team-card { background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 24px; }
+  .team-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--c-tag-bg); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: var(--c-accent-mid); margin-bottom: 14px; }
+  .team-name { font-size: 16px; font-weight: 700; color: var(--c-dark); margin-bottom: 3px; }
+  .team-role { font-size: 12px; font-weight: 600; color: var(--c-accent-mid); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+  .team-desc { font-size: 13px; color: var(--c-text-muted); line-height: 1.6; }
+  .pricing-block { background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius); overflow: hidden; }
+  .pricing-header { background: var(--c-dark); color: var(--c-white); padding: 36px 36px 28px; }
+  .pricing-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+  .pricing-main { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+  .pricing-amount { font-size: 44px; font-weight: 800; letter-spacing: -0.03em; color: #ffffff; }
+  .pricing-amount-rub { font-size: 22px; font-weight: 500; color: rgba(255,255,255,0.55); }
+  .pricing-note { font-size: 14px; color: rgba(255,255,255,0.5); }
+  .pricing-rows { padding: 0; }
+  .pricing-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 28px; border-bottom: 1px solid var(--c-border); gap: 16px; }
+  .pricing-row:last-child { border-bottom: none; }
+  .pricing-row-name { font-size: 14px; color: var(--c-text); font-weight: 500; }
+  .pricing-row-sub { font-size: 12px; color: var(--c-text-muted); margin-top: 2px; }
+  .pricing-row-price { font-size: 15px; font-weight: 700; color: var(--c-dark); white-space: nowrap; }
+  .pricing-split { background: var(--c-surface); border-top: 1px solid var(--c-border); padding: 20px 28px; }
+  .pricing-split-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--c-text-muted); margin-bottom: 12px; }
+  .split-steps { display: flex; gap: 0; border: 1px solid var(--c-border); border-radius: var(--radius-sm); overflow: hidden; }
+  .split-step { flex: 1; text-align: center; padding: 10px 8px; background: var(--c-white); border-right: 1px solid var(--c-border); font-size: 12px; }
+  .split-step:last-child { border-right: none; }
+  .split-pct { font-size: 16px; font-weight: 700; color: var(--c-dark); display: block; }
+  .split-when { color: var(--c-text-muted); margin-top: 2px; display: block; }
+  .cta-section { padding: 64px 0; text-align: center; }
+  .cta-section h2 { font-size: 28px; font-weight: 700; color: var(--c-dark); margin-bottom: 12px; letter-spacing: -0.015em; }
+  .cta-section p { font-size: 16px; color: var(--c-text-muted); margin-bottom: 32px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--c-accent); color: #fff; font-size: 16px; font-weight: 600; padding: 14px 32px; border-radius: var(--radius-sm); transition: background 0.15s; text-decoration: none; }
+  .cta-btn:hover { background: var(--c-accent-mid); color: #fff; }
+  .cta-sub { margin-top: 16px; font-size: 13px; color: var(--c-text-faint); }
+  .footer { border-top: 1px solid var(--c-border); padding: 24px 0; text-align: center; font-size: 12px; color: var(--c-text-faint); }
+  @media (max-width: 600px) {
+    .hero { padding: 48px 0 40px; }
+    .task-header { flex-direction: column; gap: 12px; }
+    .pricing-amount { font-size: 34px; }
+    .split-steps { flex-direction: column; }
+    .split-step { border-right: none; border-bottom: 1px solid var(--c-border); }
+    .split-step:last-child { border-bottom: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-brand">🤖 ИИ-ВИЗАЦИЯ &nbsp;·&nbsp; КП для Бориса</span>
+    <a href="https://t.me/ii_vizaciya" class="nav-cta">Связаться →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">Коммерческое предложение · Этап 1</div>
+    <h1>Два ИИ-агента<br>для <span>вашего бизнеса.</span><br>Внедряем под ключ.</h1>
+    <p class="hero-sub">Персональный бизнес-ассистент, ИИ-агент для вашего ПО и облачная инфраструктура на базе OpenClaw — настраиваем, устанавливаем и обучаем работе под ключ.</p>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Агента под ваши задачи</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">~<span>3</span> нед.</div>
+        <div class="stat-label">Установка и настройка</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num"><span>$</span>4 500</div>
+        <div class="stat-label">Стоимость пакетом</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">+1 мес.</div>
+        <div class="stat-label">Поддержка после запуска</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-num">01 · Состав работ</div>
+    <h2 class="section-title">Три блока — каждый под свою задачу</h2>
+    <p class="section-lead">Не коробочный продукт, а настройка под вашу специфику: работа с диагностическим ПО, облачная инфраструктура и обучение команды.</p>
+
+    <div class="task-card">
+      <div class="task-header">
+        <div class="task-icon">🧠</div>
+        <div class="task-meta">
+          <div class="task-num">Агент 1</div>
+          <div class="task-title">Персональный бизнес-ассистент</div>
+          <div class="task-subtitle">Внешний сервер · Claude или OpenAI по подписке</div>
+        </div>
+        <div class="task-badge">ПРОДАКШН</div>
+      </div>
+      <div class="task-body">
+        <p>Ваш личный ИИ-помощник, который живёт на удалённом сервере и доступен с любого устройства. Помогает с управлением бизнесом: анализ, документы, работа с базой знаний по вашим продуктам. Подключаем нужные MCP-инструменты — поиск, почта, календарь и другие сервисы.</p>
+        <div class="task-features">
+          <div class="feature-item"><div class="feature-dot"></div><span>Настройка под специфику вашего бизнеса и продуктов</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Подключение MCP-инструментов: поиск, почта, документы</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Размещение на внешнем сервере — работает 24/7</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Доступ с любого устройства — ПК, телефон, планшет</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Обучение: промпты, сценарии, реальные задачи</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Выбор оптимальной модели под ваш бюджет</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div class="task-header">
+        <div class="task-icon">⚙️</div>
+        <div class="task-meta">
+          <div class="task-num">Агент 2</div>
+          <div class="task-title">ИИ-агент для работы с вашим ПО</div>
+          <div class="task-subtitle">Локальная установка на ваш компьютер · через удалённое подключение</div>
+        </div>
+        <div class="task-badge">УСТАНОВКА</div>
+      </div>
+      <div class="task-body">
+        <p>Устанавливаем ИИ-инструмент прямо на ваш компьютер через удалённое подключение (TeamViewer). Агент помогает работать с вашим диагностическим программным обеспечением: отвечает на вопросы по данным, помогает разбираться в результатах, автоматизирует рутинные операции. Данные не покидают ваш компьютер.</p>
+        <div class="task-features">
+          <div class="feature-item"><div class="feature-dot"></div><span>Установка и настройка через TeamViewer без вашего участия</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Развёртывание Claude Code или локальной модели на вашем ПК</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Интеграция с вашим диагностическим программным обеспечением</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Обучение и демонстрация работы агента</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Данные не покидают ваш компьютер — полная безопасность</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Точный функционал — согласуем на стартовом созвоне</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div class="task-header">
+        <div class="task-icon">🎓</div>
+        <div class="task-meta">
+          <div class="task-num">Блок 3</div>
+          <div class="task-title">Индивидуальный тренинг по ИИ и MCP</div>
+          <div class="task-subtitle">3 недели · 6 сессий по 1,5 часа · под ваши конкретные задачи</div>
+        </div>
+        <div class="task-badge">ТРЕНИНГ</div>
+      </div>
+      <div class="task-body">
+        <p>Полноценный персональный тренинг параллельно с внедрением: две сессии в неделю по полтора часа на протяжении трёх недель. Разбираем не абстрактные примеры, а ваши реальные задачи. Отдельный блок — глубокое погружение в MCP: как подключать инструменты, какие возможности есть, как выстроить удобную работу именно под вас.</p>
+        <div class="task-features">
+          <div class="feature-item"><div class="feature-dot"></div><span>6 сессий × 1,5 часа — 2 раза в неделю на протяжении 3 недель</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Как работать с агентами: промпты, сценарии, реальные задачи</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Полное погружение в MCP: подключение, возможности, практика</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Разбор конкретных задач вашего бизнеса и диагностического ПО</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Записи всех сессий — можно пересмотреть в любой момент</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Дорожная карта: как дальше развивать работу с ИИ самостоятельно</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div class="task-header">
+        <div class="task-icon">☁️</div>
+        <div class="task-meta">
+          <div class="task-num">Блок 4</div>
+          <div class="task-title">Облачная инфраструктура и установка OpenClaw</div>
+          <div class="task-subtitle">Онлайн-развёртывание · настройка под ваш компьютер · через TeamViewer</div>
+        </div>
+        <div class="task-badge">ПОД КЛЮЧ</div>
+      </div>
+      <div class="task-body">
+        <p>Разрабатываем и разворачиваем облачную инфраструктуру под ваши задачи: подбираем архитектуру, настраиваем окружение и устанавливаем OpenClaw онлайн. Параллельно готовим правильную структуру кода под ваш локальный компьютер и устанавливаем всё вручную через TeamViewer — без вашего участия в технических деталях.</p>
+        <div class="task-features">
+          <div class="feature-item"><div class="feature-dot"></div><span>Разработка подходящей облачной инфраструктуры под ваши задачи</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Установка и настройка OpenClaw в облаке под ключ</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Подготовка правильной структуры кода под ваш компьютер</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Полная установка через TeamViewer — вы просто смотрите</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Связка облака и локального окружения в единую систему</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Проверка и тестирование всей цепочки перед сдачей</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-num">02 · Что остаётся у вас</div>
+    <h2 class="section-title">Не отчёт о работе, а рабочие инструменты</h2>
+    <p class="section-lead">Всё — ваша собственность. Код, настройки, доступы. Никакой абонентки за «пользование агентами».</p>
+    <div class="included-grid">
+      <div class="included-card">
+        <span class="included-icon">🧠</span>
+        <div class="included-name">Персональный ИИ-ассистент</div>
+        <div class="included-desc">Настроенный под вас, с историей диалогов и базой знаний о вашем бизнесе.</div>
+      </div>
+      <div class="included-card">
+        <span class="included-icon">⚙️</span>
+        <div class="included-name">Агент на вашем компьютере</div>
+        <div class="included-desc">Установлен локально, работает с вашим ПО, данные никуда не уходят.</div>
+      </div>
+      <div class="included-card">
+        <span class="included-icon">🎓</span>
+        <div class="included-name">Индивидуальный тренинг — 3 недели</div>
+        <div class="included-desc">6 сессий по 1,5 часа: работа с агентами, MCP, промпты и реальные сценарии из вашего бизнеса.</div>
+      </div>
+      <div class="included-card">
+        <span class="included-icon">🔌</span>
+        <div class="included-name">Полное погружение в MCP</div>
+        <div class="included-desc">Как подключать инструменты, какие возможности есть, как использовать максимально удобно под ваши задачи.</div>
+      </div>
+      <div class="included-card">
+        <span class="included-icon">🔒</span>
+        <div class="included-name">Безопасность данных</div>
+        <div class="included-desc">Регламент работы с данными. Второй агент работает полностью локально.</div>
+      </div>
+      <div class="included-card">
+        <span class="included-icon">🗺</span>
+        <div class="included-name">Дорожная карта развития</div>
+        <div class="included-desc">План следующих шагов: как развивать агентов и что подключить в будущем.</div>
+      </div>
+      <div class="included-card">
+        <span class="included-icon">💬</span>
+        <div class="included-name">Месяц поддержки</div>
+        <div class="included-desc">Чат с командой, донастройка по вашей обратной связи, разбор вопросов.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-num">03 · План работ</div>
+    <h2 class="section-title">Три недели — от старта до запуска</h2>
+    <p class="section-lead">Работаем параллельно по двум агентам, чтобы не затягивать.</p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">1</div>
+        <div class="tl-content">
+          <div class="tl-tag">Неделя 1</div>
+          <div class="tl-title">Знакомство и аудит</div>
+          <div class="tl-desc">Созвон с демонстрацией экрана: смотрим ваше ПО, понимаем задачи, согласуем состав агентов. Получаем доступы для настройки сервера.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div class="tl-content">
+          <div class="tl-tag">Недели 1–2</div>
+          <div class="tl-title">Настройка бизнес-ассистента</div>
+          <div class="tl-desc">Поднимаем сервер, настраиваем агента под ваши задачи, подключаем MCP-инструменты, прописываем базу знаний о вашем бизнесе и продуктах.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div class="tl-content">
+          <div class="tl-tag">Недели 2–3</div>
+          <div class="tl-title">Установка агента на ваш компьютер</div>
+          <div class="tl-desc">Подключаемся через TeamViewer, устанавливаем и настраиваем ИИ-инструмент, интегрируем с вашим диагностическим ПО, проверяем работу.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">4</div>
+        <div class="tl-content">
+          <div class="tl-tag">Неделя 3</div>
+          <div class="tl-title">Обучение и сдача</div>
+          <div class="tl-desc">Показываем как работать с обоими агентами, разбираем реальные сценарии из вашей работы, передаём дорожную карту.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">★</div>
+        <div class="tl-content">
+          <div class="tl-tag">Недели 4–7</div>
+          <div class="tl-title">Месяц поддержки</div>
+          <div class="tl-desc">Отвечаем на вопросы, донастраиваем агентов по вашей обратной связи, помогаем выйти в самостоятельную работу.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-num">04 · Команда</div>
+    <h2 class="section-title">Те же люди, что уже делали это</h2>
+    <p class="section-lead">Внедряли агентов строительной компании в Норильске, девелоперу в Дубае, маркетинговому агентству в Москве. Исполнительный руководитель — Ефим.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">ЕГ</div>
+        <div class="team-name">Ефим Герасимов</div>
+        <div class="team-role">Руководитель · Lead-инженер</div>
+        <div class="team-desc">Ведёт проект от аудита до поддержки: архитектура агентов, инфраструктура, интеграции. Ваш главный контакт по всем техническим вопросам.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">СП</div>
+        <div class="team-name">Станислав Панков</div>
+        <div class="team-role">Методология · Обучение</div>
+        <div class="team-desc">Программа обучения и методология внедрения. Обучил работе с ИИ 10 000+ человек — от корпораций до небольших команд.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-num">05 · Стоимость</div>
+    <h2 class="section-title">Три блока под ключ — единый пакет</h2>
+    <p class="section-lead">Без скрытых расходов. Оплата по этапам.</p>
+    <div class="pricing-block">
+      <div class="pricing-header">
+        <div class="pricing-label">Итоговая стоимость · пакет Этап 1</div>
+        <div class="pricing-main">
+          <span class="pricing-amount">$4 500</span>
+          <span class="pricing-amount-rub">≈ 405 000 ₽</span>
+        </div>
+        <div class="pricing-note">Два агента + облачная инфраструктура · установка · настройка · обучение · месяц поддержки</div>
+      </div>
+      <div class="pricing-rows">
+        <div class="pricing-row">
+          <div>
+            <div class="pricing-row-name">🧠 Бизнес-ассистент на внешнем сервере</div>
+            <div class="pricing-row-sub">Настройка, MCP-инструменты, база знаний, доступ 24/7</div>
+          </div>
+          <div class="pricing-row-price">$1 800</div>
+        </div>
+        <div class="pricing-row">
+          <div>
+            <div class="pricing-row-name">⚙️ Агент для работы с вашим ПО</div>
+            <div class="pricing-row-sub">Установка через TeamViewer, интеграция, локальная работа</div>
+          </div>
+          <div class="pricing-row-price">$1 500</div>
+        </div>
+        <div class="pricing-row">
+          <div>
+            <div class="pricing-row-name">🎓 Индивидуальный тренинг + поддержка</div>
+            <div class="pricing-row-sub">6 сессий × 1,5 ч за 3 недели · MCP под ваши задачи · месяц сопровождения</div>
+          </div>
+          <div class="pricing-row-price">$1 200</div>
+        </div>
+        <div class="pricing-row">
+          <div>
+            <div class="pricing-row-name">☁️ Облачная инфраструктура и установка OpenClaw</div>
+            <div class="pricing-row-sub">Архитектура, развёртывание в облаке, настройка кода под ваш ПК через TeamViewer</div>
+          </div>
+          <div class="pricing-row-price">$1 000</div>
+        </div>
+      </div>
+      <div class="pricing-split">
+        <div class="pricing-split-title">График оплаты</div>
+        <div class="split-steps">
+          <div class="split-step">
+            <span class="split-pct">50%</span>
+            <span class="split-when">На старте</span>
+          </div>
+          <div class="split-step">
+            <span class="split-pct">30%</span>
+            <span class="split-when">После запуска агентов</span>
+          </div>
+          <div class="split-step">
+            <span class="split-pct">20%</span>
+            <span class="split-when">После обучения</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:16px; font-size:13px; color:var(--c-text-muted);">
+      + Подписка на модель (Claude, OpenAI или другая) — оплачивается отдельно по факту использования, без абонентки. Помогаем подобрать оптимальный вариант под ваши задачи и бюджет.
+    </p>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="wrap">
+    <h2>Готовы начать?</h2>
+    <p>Напишите нам — согласуем старт и ответим на вопросы.</p>
+    <a href="https://t.me/ii_vizaciya" class="cta-btn">Написать в Telegram →</a>
+    <p class="cta-sub">Коммерческое предложение подготовлено индивидуально для Бориса</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">ИИ-ВИЗАЦИЯ · Внедрение ИИ-агентов в бизнес</div>
+</footer>
+
+</body>
+</html>
