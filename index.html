@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ИИ-агенты для бизнеса · КП для Бориса · ИИ-ВИЗАЦИЯ</title>
+<title>ИИ под ваше ПО · КП для Бориса · ИИ-ВИЗАЦИЯ</title>
 <style>
   :root {
     --c-accent: #1D9E75;
@@ -27,15 +27,14 @@
   .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--c-border); padding: 14px 0; }
   .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
   .nav-brand { font-size: 13px; font-weight: 600; color: var(--c-text-muted); letter-spacing: 0.04em; text-transform: uppercase; }
-  .nav-cta { font-size: 13px; font-weight: 600; color: var(--c-accent-mid); border: 1.5px solid var(--c-accent); border-radius: 6px; padding: 6px 16px; transition: background 0.15s; }
-  .nav-cta:hover { background: var(--c-accent-light); }
+  .nav-cta { font-size: 13px; font-weight: 600; color: var(--c-text-faint); border: 1.5px solid var(--c-border); border-radius: 6px; padding: 6px 16px; }
   .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
   .hero { padding: 72px 0 56px; border-bottom: 1px solid var(--c-border); }
   .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-accent-mid); background: var(--c-tag-bg); padding: 5px 12px; border-radius: 20px; margin-bottom: 28px; }
   .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent); display: inline-block; }
-  .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.13; letter-spacing: -0.02em; color: var(--c-dark); margin-bottom: 24px; max-width: 680px; }
+  .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.13; letter-spacing: -0.02em; color: var(--c-dark); margin-bottom: 24px; max-width: 700px; }
   .hero h1 span { color: var(--c-accent); }
-  .hero-sub { font-size: 18px; color: var(--c-text-muted); max-width: 580px; line-height: 1.6; margin-bottom: 44px; }
+  .hero-sub { font-size: 18px; color: var(--c-text-muted); max-width: 620px; line-height: 1.6; margin-bottom: 44px; }
   .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
   .stat-card { background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 20px 20px 16px; }
   .stat-num { font-size: 28px; font-weight: 700; color: var(--c-dark); letter-spacing: -0.02em; line-height: 1; margin-bottom: 6px; }
@@ -44,7 +43,7 @@
   .section { padding: 64px 0; border-bottom: 1px solid var(--c-border); }
   .section-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-accent); margin-bottom: 10px; }
   .section-title { font-size: clamp(22px, 3vw, 30px); font-weight: 700; letter-spacing: -0.015em; color: var(--c-dark); margin-bottom: 12px; line-height: 1.2; }
-  .section-lead { font-size: 16px; color: var(--c-text-muted); max-width: 600px; margin-bottom: 40px; }
+  .section-lead { font-size: 16px; color: var(--c-text-muted); max-width: 620px; margin-bottom: 40px; }
   .task-card { background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; }
   .task-header { display: flex; align-items: flex-start; gap: 16px; padding: 28px 28px 20px; border-bottom: 1px solid var(--c-border); }
   .task-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--c-tag-bg); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
@@ -55,10 +54,16 @@
   .task-badge { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; background: var(--c-tag-bg); color: var(--c-tag-text); white-space: nowrap; }
   .task-body { padding: 24px 28px; }
   .task-body p { font-size: 15px; color: var(--c-text-muted); margin-bottom: 20px; line-height: 1.65; }
-  .task-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .task-body p.tight { margin-bottom: 14px; }
+  .task-body .mk { color: var(--c-accent-mid); font-weight: 600; }
+  .task-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
   .feature-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--c-text); }
   .feature-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--c-tag-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
   .feature-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent); display: block; }
+  .approach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 4px 0 22px; }
+  .approach-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius-sm); padding: 16px 18px; }
+  .approach-card .ah { font-size: 14px; font-weight: 700; color: var(--c-dark); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+  .approach-card .ad { font-size: 13px; color: var(--c-text-muted); line-height: 1.55; }
   .included-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
   .included-card { background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius); padding: 20px; }
   .included-icon { font-size: 22px; margin-bottom: 10px; display: block; }
@@ -91,6 +96,7 @@
   .pricing-row-name { font-size: 14px; color: var(--c-text); font-weight: 500; }
   .pricing-row-sub { font-size: 12px; color: var(--c-text-muted); margin-top: 2px; }
   .pricing-row-price { font-size: 15px; font-weight: 700; color: var(--c-dark); white-space: nowrap; }
+  .pricing-row.opt .pricing-row-price { color: var(--c-text-faint); }
   .pricing-split { background: var(--c-surface); border-top: 1px solid var(--c-border); padding: 20px 28px; }
   .pricing-split-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--c-text-muted); margin-bottom: 12px; }
   .split-steps { display: flex; gap: 0; border: 1px solid var(--c-border); border-radius: var(--radius-sm); overflow: hidden; }
@@ -98,12 +104,9 @@
   .split-step:last-child { border-right: none; }
   .split-pct { font-size: 16px; font-weight: 700; color: var(--c-dark); display: block; }
   .split-when { color: var(--c-text-muted); margin-top: 2px; display: block; }
-  .cta-section { padding: 64px 0; text-align: center; }
-  .cta-section h2 { font-size: 28px; font-weight: 700; color: var(--c-dark); margin-bottom: 12px; letter-spacing: -0.015em; }
-  .cta-section p { font-size: 16px; color: var(--c-text-muted); margin-bottom: 32px; }
-  .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--c-accent); color: #fff; font-size: 16px; font-weight: 600; padding: 14px 32px; border-radius: var(--radius-sm); transition: background 0.15s; text-decoration: none; }
-  .cta-btn:hover { background: var(--c-accent-mid); color: #fff; }
-  .cta-sub { margin-top: 16px; font-size: 13px; color: var(--c-text-faint); }
+  .closing { padding: 64px 0; text-align: center; }
+  .closing h2 { font-size: 28px; font-weight: 700; color: var(--c-dark); margin-bottom: 12px; letter-spacing: -0.015em; }
+  .closing p { font-size: 16px; color: var(--c-text-muted); max-width: 600px; margin: 0 auto; }
   .footer { border-top: 1px solid var(--c-border); padding: 24px 0; text-align: center; font-size: 12px; color: var(--c-text-faint); }
   @media (max-width: 600px) {
     .hero { padding: 48px 0 40px; }
@@ -120,31 +123,31 @@
 <nav class="nav">
   <div class="nav-inner">
     <span class="nav-brand">🤖 ИИ-ВИЗАЦИЯ &nbsp;·&nbsp; КП для Бориса</span>
-    <a href="https://t.me/ii_vizaciya" class="nav-cta">Связаться →</a>
+    <span class="nav-cta">Внутренний документ</span>
   </div>
 </nav>
 
 <section class="hero">
   <div class="wrap">
-    <div class="hero-eyebrow">Коммерческое предложение · Этап 1</div>
-    <h1>Два ИИ-агента<br>для <span>вашего бизнеса.</span><br>Внедряем под ключ.</h1>
-    <p class="hero-sub">Персональный бизнес-ассистент, ИИ-агент для вашего ПО и облачная инфраструктура на базе OpenClaw — настраиваем, устанавливаем и обучаем работе под ключ.</p>
+    <div class="hero-eyebrow">Видение сотрудничества · обновлено после созвона</div>
+    <h1>Обучаем и <span>собираем вместе</span> ИИ-агентов под вашу закрытую программу.</h1>
+    <p class="hero-sub">Сначала вместе разбираемся в ИИ — вы и сын. Затем в серии рабочих сессий разворачиваем и собираем агентов, которые управляют вашим медицинским ПО. Всю сложную инженерную работу берём на себя, после чего передаём исходники и учим развивать систему самостоятельно.</p>
     <div class="hero-stats">
       <div class="stat-card">
-        <div class="stat-num">2</div>
-        <div class="stat-label">Агента под ваши задачи</div>
+        <div class="stat-num"><span>2</span> трека</div>
+        <div class="stat-label">Обучение + рабочие сессии</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num">~<span>3</span> нед.</div>
-        <div class="stat-label">Установка и настройка</div>
+        <div class="stat-num">Вы + сын</div>
+        <div class="stat-label">Общий трек обучения</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num"><span>$</span>4 500</div>
+        <div class="stat-num"><span>100</span>→1</div>
+        <div class="stat-label">Пакетная обработка пациентов</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num"><span>$</span>8 000</div>
         <div class="stat-label">Стоимость пакетом</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">+1 мес.</div>
-        <div class="stat-label">Поддержка после запуска</div>
       </div>
     </div>
   </div>
@@ -152,29 +155,58 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="section-num">01 · Состав работ</div>
-    <h2 class="section-title">Три блока — каждый под свою задачу</h2>
-    <p class="section-lead">Не коробочный продукт, а настройка под вашу специфику: работа с диагностическим ПО, облачная инфраструктура и обучение команды.</p>
+    <div class="section-num">01 · Что мы услышали на созвоне</div>
+    <h2 class="section-title">Формат сместился — и это правильно</h2>
+    <p class="section-lead">Это не установка готового продукта, а инженерная работа под вашу специфику. Поэтому мы переупаковали предложение под то, что вы сами сформулировали: «обучите нас, разверните, покажите — дальше донастроим».</p>
 
     <div class="task-card">
       <div class="task-header">
-        <div class="task-icon">🧠</div>
+        <div class="task-icon">🧭</div>
         <div class="task-meta">
-          <div class="task-num">Агент 1</div>
-          <div class="task-title">Персональный бизнес-ассистент</div>
-          <div class="task-subtitle">Внешний сервер · Claude или OpenAI по подписке</div>
+          <div class="task-num">Контекст</div>
+          <div class="task-title">От «коробки под ключ» — к обучению и co-building</div>
+          <div class="task-subtitle">Закрытое ПО · нет API и выгрузки · ядро и данные остаются у вас</div>
         </div>
-        <div class="task-badge">ПРОДАКШН</div>
+        <div class="task-badge">ОСНОВА</div>
       </div>
       <div class="task-body">
-        <p>Ваш личный ИИ-помощник, который живёт на удалённом сервере и доступен с любого устройства. Помогает с управлением бизнесом: анализ, документы, работа с базой знаний по вашим продуктам. Подключаем нужные MCP-инструменты — поиск, почта, календарь и другие сервисы.</p>
+        <p>Программа закрытая: нет API, веб-интерфейса и выгрузки. Поэтому агент работает как ассистент врача — открывает вкладки, читает экран, жмёт кнопки и формирует заключения. Сервер с локальной моделью за 1–1,5 млн ₽ не нужен: используем коммерческие модели c zero-data-retention (SOC 2) — данные не уходят на обучение, ядро недоступно.</p>
         <div class="task-features">
-          <div class="feature-item"><div class="feature-dot"></div><span>Настройка под специфику вашего бизнеса и продуктов</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Подключение MCP-инструментов: поиск, почта, документы</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Размещение на внешнем сервере — работает 24/7</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Доступ с любого устройства — ПК, телефон, планшет</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Обучение: промпты, сценарии, реальные задачи</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Выбор оптимальной модели под ваш бюджет</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Вы и сын становитесь владельцами процесса, а не зависите от подрядчика</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Сложную архитектуру и настройку делаем мы — вы развиваете дальше</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Данные и секреты ядра не покидают ваш контур</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Логику можно менять на лету — после передачи исходников</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-num">02 · Состав работ</div>
+    <h2 class="section-title">Два трека под ключ + опциональный эксперимент</h2>
+    <p class="section-lead">Общий трек обучения для вас и сына и серия прикладных рабочих сессий по сборке агентов. Плюс — отдельный опциональный эксперимент.</p>
+
+    <div class="task-card">
+      <div class="task-header">
+        <div class="task-icon">🎓</div>
+        <div class="task-meta">
+          <div class="task-num">Трек 1 · Обучение</div>
+          <div class="task-title">Совместное обучение по ИИ — вы и сын</div>
+          <div class="task-subtitle">Общий трек на двоих · параллельно с внедрением · записи всех сессий</div>
+        </div>
+        <div class="task-badge">ФУНДАМЕНТ</div>
+      </div>
+      <div class="task-body">
+        <p>Полноценное персональное обучение, чтобы вы перестали зависеть от чужих оценок «это сложно и долго». Разбираем, как реально работают ИИ-агенты, и сразу применяем на ваших задачах. Сын идёт тем же треком и становится внутренним человеком, который дальше поддерживает систему.</p>
+        <div class="task-features">
+          <div class="feature-item"><div class="feature-dot"></div><span>Как устроены модели и чем отличаются под бюджет и задачу</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>MCP-инструменты: что подключается и какие возможности даёт</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Computer-use: как ИИ «жмёт кнопки» в закрытых программах</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Промпты и сценарии под ваши реальные кейсы</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Как читать, проверять и корректировать работу агента</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Записи сессий — можно пересматривать в любой момент</span></div>
         </div>
       </div>
     </div>
@@ -183,67 +215,55 @@
       <div class="task-header">
         <div class="task-icon">⚙️</div>
         <div class="task-meta">
-          <div class="task-num">Агент 2</div>
-          <div class="task-title">ИИ-агент для работы с вашим ПО</div>
-          <div class="task-subtitle">Локальная установка на ваш компьютер · через удалённое подключение</div>
+          <div class="task-num">Трек 2 · Рабочие сессии</div>
+          <div class="task-title">Собираем агентов под вашу медицинскую программу</div>
+          <div class="task-subtitle">Всю сложную архитектуру и настройку workflow берём на себя · затем передаём исходники и учим развивать</div>
         </div>
-        <div class="task-badge">УСТАНОВКА</div>
+        <div class="task-badge">CO-BUILDING</div>
       </div>
       <div class="task-body">
-        <p>Устанавливаем ИИ-инструмент прямо на ваш компьютер через удалённое подключение (TeamViewer). Агент помогает работать с вашим диагностическим программным обеспечением: отвечает на вопросы по данным, помогает разбираться в результатах, автоматизирует рутинные операции. Данные не покидают ваш компьютер.</p>
+        <p class="tight">Главная прикладная часть. Всю сложную инженерную работу — архитектуру агента, способ «видеть» закрытое ПО и настройку workflow — мы берём на себя. Поскольку у программы нет API и выгрузки, агент управляет интерфейсом одним из двух способов:</p>
+        <div class="approach-grid">
+          <div class="approach-card">
+            <div class="ah">🌳 Accessibility-дерево Windows · UI Automation</div>
+            <div class="ad">Точный машинный доступ к элементам интерфейса, кнопкам и полям. Быстро, стабильно, не зависит от разрешения и положения окна.</div>
+          </div>
+          <div class="approach-card">
+            <div class="ah">👁 Визуальный ИИ-агент · Vision API</div>
+            <div class="ad">Агент распознаёт экран и действует как врач-оператор. Работает там, где интерфейс закрыт для машинного доступа.</div>
+          </div>
+        </div>
+        <p class="tight">Выбираем оптимальный вариант под вашу программу или комбинируем оба. На этой основе строим рабочий поток: агент открывает программу, заводит пациента, грузит файлы, ведёт анализ по вашим критериям и формирует заключение. Ваши знания врача переносятся в инструкции агента — он повторяет логику на потоке. <span class="mk">После сборки мы передаём все исходные данные и материалы и обучаем тому, как это модернизировать, улучшать, обновлять и дообучать.</span></p>
         <div class="task-features">
-          <div class="feature-item"><div class="feature-dot"></div><span>Установка и настройка через TeamViewer без вашего участия</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Развёртывание Claude Code или локальной модели на вашем ПК</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Интеграция с вашим диагностическим программным обеспечением</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Обучение и демонстрация работы агента</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Данные не покидают ваш компьютер — полная безопасность</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Точный функционал — согласуем на стартовом созвоне</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Архитектура и выбор подхода (accessibility-дерево / Vision) — на нас</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Настройка workflow: приём файлов с диска, Telegram, почты</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Загрузка в вашу локальную версию и заведение пациента</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Пакетная обработка: 100 файлов от 100 пациентов за раз</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Анализ по вашим показателям → 100 заключений в чётком формате</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Передача всех исходников и доступов — никакого «чёрного ящика»</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Обучение: как модернизировать, обновлять и дообучать агента самим</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Задел под следующий этап: агенты, общающиеся с пациентами</span></div>
         </div>
       </div>
     </div>
 
     <div class="task-card">
       <div class="task-header">
-        <div class="task-icon">🎓</div>
+        <div class="task-icon">📱</div>
         <div class="task-meta">
-          <div class="task-num">Блок 3</div>
-          <div class="task-title">Индивидуальный тренинг по ИИ и MCP</div>
-          <div class="task-subtitle">3 недели · 6 сессий по 1,5 часа · под ваши конкретные задачи</div>
+          <div class="task-num">Опционально · Эксперимент</div>
+          <div class="task-title">Android → iOS: сравнительный тест «ИИ vs команда»</div>
+          <div class="task-subtitle">Отдельный недорогой эксперимент · по желанию · не входит в основной пакет</div>
         </div>
-        <div class="task-badge">ТРЕНИНГ</div>
+        <div class="task-badge">ПО ЖЕЛАНИЮ</div>
       </div>
       <div class="task-body">
-        <p>Полноценный персональный тренинг параллельно с внедрением: две сессии в неделю по полтора часа на протяжении трёх недель. Разбираем не абстрактные примеры, а ваши реальные задачи. Отдельный блок — глубокое погружение в MCP: как подключать инструменты, какие возможности есть, как выстроить удобную работу именно под вас.</p>
+        <p>Не срочная задача, а наглядная проверка: сможет ли ИИ переписать ваше простое приложение быстрее и дешевле, чем об этом говорит команда. Берём существующую кодовую базу, даём агенту переписать её под iOS и сравниваем результат, сроки и стоимость. Цель — получить честную точку отсчёта для оценки своей разработки.</p>
         <div class="task-features">
-          <div class="feature-item"><div class="feature-dot"></div><span>6 сессий × 1,5 часа — 2 раза в неделю на протяжении 3 недель</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Как работать с агентами: промпты, сценарии, реальные задачи</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Полное погружение в MCP: подключение, возможности, практика</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Разбор конкретных задач вашего бизнеса и диагностического ПО</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Записи всех сессий — можно пересмотреть в любой момент</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Дорожная карта: как дальше развивать работу с ИИ самостоятельно</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="task-card">
-      <div class="task-header">
-        <div class="task-icon">☁️</div>
-        <div class="task-meta">
-          <div class="task-num">Блок 4</div>
-          <div class="task-title">Облачная инфраструктура и установка OpenClaw</div>
-          <div class="task-subtitle">Онлайн-развёртывание · настройка под ваш компьютер · через TeamViewer</div>
-        </div>
-        <div class="task-badge">ПОД КЛЮЧ</div>
-      </div>
-      <div class="task-body">
-        <p>Разрабатываем и разворачиваем облачную инфраструктуру под ваши задачи: подбираем архитектуру, настраиваем окружение и устанавливаем OpenClaw онлайн. Параллельно готовим правильную структуру кода под ваш локальный компьютер и устанавливаем всё вручную через TeamViewer — без вашего участия в технических деталях.</p>
-        <div class="task-features">
-          <div class="feature-item"><div class="feature-dot"></div><span>Разработка подходящей облачной инфраструктуры под ваши задачи</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Установка и настройка OpenClaw в облаке под ключ</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Подготовка правильной структуры кода под ваш компьютер</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Полная установка через TeamViewer — вы просто смотрите</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Связка облака и локального окружения в единую систему</span></div>
-          <div class="feature-item"><div class="feature-dot"></div><span>Проверка и тестирование всей цепочки перед сдачей</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Работает только при наличии исходного кода приложения</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Приложение простое: запись · отправка · удаление пациента</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Связь с гаджетом по Bluetooth/Wi-Fi, файлы WAV → ZIP</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Итог: сравнение «ИИ vs команда» по срокам и цене</span></div>
         </div>
       </div>
     </div>
@@ -252,44 +272,44 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="section-num">02 · Что остаётся у вас</div>
-    <h2 class="section-title">Не отчёт о работе, а рабочие инструменты</h2>
-    <p class="section-lead">Всё — ваша собственность. Код, настройки, доступы. Никакой абонентки за «пользование агентами».</p>
+    <div class="section-num">03 · Что остаётся у вас</div>
+    <h2 class="section-title">Рабочие инструменты и навык, а не отчёт</h2>
+    <p class="section-lead">Всё — ваша собственность: агенты, настройки, доступы. И, главное, понимание — как развивать это самостоятельно.</p>
     <div class="included-grid">
       <div class="included-card">
-        <span class="included-icon">🧠</span>
-        <div class="included-name">Персональный ИИ-ассистент</div>
-        <div class="included-desc">Настроенный под вас, с историей диалогов и базой знаний о вашем бизнесе.</div>
-      </div>
-      <div class="included-card">
         <span class="included-icon">⚙️</span>
-        <div class="included-name">Агент на вашем компьютере</div>
-        <div class="included-desc">Установлен локально, работает с вашим ПО, данные никуда не уходят.</div>
+        <div class="included-name">Работающие агенты</div>
+        <div class="included-desc">Собраны при вас, работают с вашим ПО локально, данные никуда не уходят.</div>
       </div>
       <div class="included-card">
         <span class="included-icon">🎓</span>
-        <div class="included-name">Индивидуальный тренинг — 3 недели</div>
-        <div class="included-desc">6 сессий по 1,5 часа: работа с агентами, MCP, промпты и реальные сценарии из вашего бизнеса.</div>
+        <div class="included-name">Навык у двоих</div>
+        <div class="included-desc">Вы и сын умеете настраивать, обновлять и улучшать агентов без подрядчика.</div>
+      </div>
+      <div class="included-card">
+        <span class="included-icon">📦</span>
+        <div class="included-name">Все исходники и доступы</div>
+        <div class="included-desc">Полная передача материалов и кода — никакого «чёрного ящика».</div>
       </div>
       <div class="included-card">
         <span class="included-icon">🔌</span>
-        <div class="included-name">Полное погружение в MCP</div>
-        <div class="included-desc">Как подключать инструменты, какие возможности есть, как использовать максимально удобно под ваши задачи.</div>
+        <div class="included-name">Погружение в MCP</div>
+        <div class="included-desc">Как подключать инструменты и расширять возможности под ваши задачи.</div>
       </div>
       <div class="included-card">
         <span class="included-icon">🔒</span>
-        <div class="included-name">Безопасность данных</div>
-        <div class="included-desc">Регламент работы с данными. Второй агент работает полностью локально.</div>
+        <div class="included-name">Регламент по данным</div>
+        <div class="included-desc">Чёткое понимание, что и куда уходит. Ядро и спектры остаются закрыты.</div>
       </div>
       <div class="included-card">
         <span class="included-icon">🗺</span>
-        <div class="included-name">Дорожная карта развития</div>
-        <div class="included-desc">План следующих шагов: как развивать агентов и что подключить в будущем.</div>
+        <div class="included-name">Дорожная карта</div>
+        <div class="included-desc">План следующих шагов: агенты для общения с пациентами и развитие системы.</div>
       </div>
       <div class="included-card">
         <span class="included-icon">💬</span>
-        <div class="included-name">Месяц поддержки</div>
-        <div class="included-desc">Чат с командой, донастройка по вашей обратной связи, разбор вопросов.</div>
+        <div class="included-name">Поддержка на старте</div>
+        <div class="included-desc">Чат с командой и разбор вопросов, пока вы выходите в самостоятельную работу.</div>
       </div>
     </div>
   </div>
@@ -297,48 +317,48 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="section-num">03 · План работ</div>
-    <h2 class="section-title">Три недели — от старта до запуска</h2>
-    <p class="section-lead">Работаем параллельно по двум агентам, чтобы не затягивать.</p>
+    <div class="section-num">04 · План работ</div>
+    <h2 class="section-title">От discovery до самостоятельной работы</h2>
+    <p class="section-lead">Чтобы не угадывать, начинаем с разбора вашей программы и задач — и только потом собираем агентов.</p>
     <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">0</div>
+        <div class="tl-content">
+          <div class="tl-tag">Старт</div>
+          <div class="tl-title">Discovery-сессия</div>
+          <div class="tl-desc">Созвон с демонстрацией экрана: смотрим программу, разбираем логику диагностики и сценарии, согласуем состав агентов и доступы.</div>
+        </div>
+      </div>
       <div class="tl-item">
         <div class="tl-dot">1</div>
         <div class="tl-content">
-          <div class="tl-tag">Неделя 1</div>
-          <div class="tl-title">Знакомство и аудит</div>
-          <div class="tl-desc">Созвон с демонстрацией экрана: смотрим ваше ПО, понимаем задачи, согласуем состав агентов. Получаем доступы для настройки сервера.</div>
+          <div class="tl-tag">Трек 1</div>
+          <div class="tl-title">Обучение вас и сына</div>
+          <div class="tl-desc">Параллельный поток сессий по основам ИИ, MCP и работе с агентами — на ваших реальных кейсах.</div>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-dot">2</div>
         <div class="tl-content">
-          <div class="tl-tag">Недели 1–2</div>
-          <div class="tl-title">Настройка бизнес-ассистента</div>
-          <div class="tl-desc">Поднимаем сервер, настраиваем агента под ваши задачи, подключаем MCP-инструменты, прописываем базу знаний о вашем бизнесе и продуктах.</div>
+          <div class="tl-tag">Трек 2</div>
+          <div class="tl-title">Рабочие сессии по сборке</div>
+          <div class="tl-desc">Разворачиваем ИИ на вашем ПК, выбираем подход (accessibility-дерево / Vision) и пошагово собираем агента под пакетную обработку и заключения.</div>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-dot">3</div>
         <div class="tl-content">
-          <div class="tl-tag">Недели 2–3</div>
-          <div class="tl-title">Установка агента на ваш компьютер</div>
-          <div class="tl-desc">Подключаемся через TeamViewer, устанавливаем и настраиваем ИИ-инструмент, интегрируем с вашим диагностическим ПО, проверяем работу.</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot">4</div>
-        <div class="tl-content">
-          <div class="tl-tag">Неделя 3</div>
-          <div class="tl-title">Обучение и сдача</div>
-          <div class="tl-desc">Показываем как работать с обоими агентами, разбираем реальные сценарии из вашей работы, передаём дорожную карту.</div>
+          <div class="tl-tag">Передача</div>
+          <div class="tl-title">Исходники и обучение развитию</div>
+          <div class="tl-desc">Передаём все материалы и доступы, учим модернизировать, обновлять и дообучать агентов самостоятельно.</div>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-dot">★</div>
         <div class="tl-content">
-          <div class="tl-tag">Недели 4–7</div>
-          <div class="tl-title">Месяц поддержки</div>
-          <div class="tl-desc">Отвечаем на вопросы, донастраиваем агентов по вашей обратной связи, помогаем выйти в самостоятельную работу.</div>
+          <div class="tl-tag">Дальше</div>
+          <div class="tl-title">Самостоятельная работа + поддержка</div>
+          <div class="tl-desc">Вы ведёте и развиваете агентов сами, мы на связи. Опционально — эксперимент с iOS и фаза агентов для общения с пациентами.</div>
         </div>
       </div>
     </div>
@@ -347,7 +367,7 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="section-num">04 · Команда</div>
+    <div class="section-num">05 · Команда</div>
     <h2 class="section-title">Те же люди, что уже делали это</h2>
     <p class="section-lead">Внедряли агентов строительной компании в Норильске, девелоперу в Дубае, маркетинговому агентству в Москве. Исполнительный руководитель — Ефим.</p>
     <div class="team-grid">
@@ -355,7 +375,7 @@
         <div class="team-avatar">ЕГ</div>
         <div class="team-name">Ефим Герасимов</div>
         <div class="team-role">Руководитель · Lead-инженер</div>
-        <div class="team-desc">Ведёт проект от аудита до поддержки: архитектура агентов, инфраструктура, интеграции. Ваш главный контакт по всем техническим вопросам.</div>
+        <div class="team-desc">Ведёт проект от discovery до поддержки: архитектура агентов, инфраструктура, интеграции. Ваш главный контакт по всем техническим вопросам.</div>
       </div>
       <div class="team-card">
         <div class="team-avatar">СП</div>
@@ -369,46 +389,53 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="section-num">05 · Стоимость</div>
-    <h2 class="section-title">Три блока под ключ — единый пакет</h2>
-    <p class="section-lead">Без скрытых расходов. Оплата по этапам.</p>
+    <div class="section-num">06 · Стоимость</div>
+    <h2 class="section-title">Пакет под ключ — обучение и сборка агентов</h2>
+    <p class="section-lead">Без скрытых расходов. Оплата по этапам. Опциональный эксперимент с iOS оценивается отдельно.</p>
     <div class="pricing-block">
       <div class="pricing-header">
-        <div class="pricing-label">Итоговая стоимость · пакет Этап 1</div>
+        <div class="pricing-label">Итоговая стоимость · пакет</div>
         <div class="pricing-main">
-          <span class="pricing-amount">$4 500</span>
-          <span class="pricing-amount-rub">≈ 405 000 ₽</span>
+          <span class="pricing-amount">$8 000</span>
+          <span class="pricing-amount-rub">≈ 720 000 ₽</span>
         </div>
-        <div class="pricing-note">Два агента + облачная инфраструктура · установка · настройка · обучение · месяц поддержки</div>
+        <div class="pricing-note">Обучение вас и сына + сборка агентов под ваше ПО · архитектура · передача исходников · месяц поддержки</div>
       </div>
       <div class="pricing-rows">
         <div class="pricing-row">
           <div>
-            <div class="pricing-row-name">🧠 Бизнес-ассистент на внешнем сервере</div>
-            <div class="pricing-row-sub">Настройка, MCP-инструменты, база знаний, доступ 24/7</div>
+            <div class="pricing-row-name">🧭 Архитектура и инженерное проектирование</div>
+            <div class="pricing-row-sub">Разбор программы, выбор подхода (accessibility-дерево / Vision), проектирование архитектуры и workflow</div>
           </div>
           <div class="pricing-row-price">$1 800</div>
         </div>
         <div class="pricing-row">
           <div>
-            <div class="pricing-row-name">⚙️ Агент для работы с вашим ПО</div>
-            <div class="pricing-row-sub">Установка через TeamViewer, интеграция, локальная работа</div>
+            <div class="pricing-row-name">⚙️ Сборка и интеграция агентов под ваше ПО</div>
+            <div class="pricing-row-sub">Главная инженерная часть: реализация агентов, пакетная обработка пациентов, формирование заключений, тестирование</div>
           </div>
-          <div class="pricing-row-price">$1 500</div>
+          <div class="pricing-row-price">$3 800</div>
         </div>
         <div class="pricing-row">
           <div>
-            <div class="pricing-row-name">🎓 Индивидуальный тренинг + поддержка</div>
-            <div class="pricing-row-sub">6 сессий × 1,5 ч за 3 недели · MCP под ваши задачи · месяц сопровождения</div>
+            <div class="pricing-row-name">🎓 Обучение работе с агентами (вы + сын)</div>
+            <div class="pricing-row-sub">Совместные сессии: как управлять, проверять, дообучать и развивать агентов на ваших реальных задачах · записи</div>
           </div>
-          <div class="pricing-row-price">$1 200</div>
+          <div class="pricing-row-price">$1 900</div>
         </div>
         <div class="pricing-row">
           <div>
-            <div class="pricing-row-name">☁️ Облачная инфраструктура и установка OpenClaw</div>
-            <div class="pricing-row-sub">Архитектура, развёртывание в облаке, настройка кода под ваш ПК через TeamViewer</div>
+            <div class="pricing-row-name">🤝 Сопровождение и развитие после запуска</div>
+            <div class="pricing-row-sub">Месяц сопровождения и донастройка. Код, доступы и регламенты передаются вам как часть сдачи проекта</div>
           </div>
-          <div class="pricing-row-price">$1 000</div>
+          <div class="pricing-row-price">$500</div>
+        </div>
+        <div class="pricing-row opt">
+          <div>
+            <div class="pricing-row-name">📱 Опционально · эксперимент Android → iOS</div>
+            <div class="pricing-row-sub">Сравнительный тест «ИИ vs команда» — по желанию, в основной пакет не входит</div>
+          </div>
+          <div class="pricing-row-price">отдельно</div>
         </div>
       </div>
       <div class="pricing-split">
@@ -420,11 +447,11 @@
           </div>
           <div class="split-step">
             <span class="split-pct">30%</span>
-            <span class="split-when">После запуска агентов</span>
+            <span class="split-when">После сборки агента</span>
           </div>
           <div class="split-step">
             <span class="split-pct">20%</span>
-            <span class="split-when">После обучения</span>
+            <span class="split-when">После обучения и передачи</span>
           </div>
         </div>
       </div>
@@ -435,17 +462,15 @@
   </div>
 </section>
 
-<section class="cta-section">
+<section class="closing">
   <div class="wrap">
-    <h2>Готовы начать?</h2>
-    <p>Напишите нам — согласуем старт и ответим на вопросы.</p>
-    <a href="https://t.me/ii_vizaciya" class="cta-btn">Написать в Telegram →</a>
-    <p class="cta-sub">Коммерческое предложение подготовлено индивидуально для Бориса</p>
+    <h2>Следующий шаг</h2>
+    <p>Стартуем с короткой discovery-сессии: разбираем вашу программу, согласуем состав агентов и фиксируем план по трекам и срокам. После неё запускаем оба трека параллельно.</p>
   </div>
 </section>
 
 <footer class="footer">
-  <div class="wrap">ИИ-ВИЗАЦИЯ · Внедрение ИИ-агентов в бизнес</div>
+  <div class="wrap">Предложение подготовлено индивидуально для Бориса · ИИ-ВИЗАЦИЯ · Внедрение и обучение работе с ИИ-агентами</div>
 </footer>
 
 </body>
